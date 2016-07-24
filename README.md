@@ -9,6 +9,7 @@ on top python twisted framework.
 ###   Install requirements
 ```bash
 sudo apt-get install python-dev
+sudo easy_install pip
 sudo pip install twisted
 git clone https://github.com/yanlobkarev/p2p.git
 cd p2p
