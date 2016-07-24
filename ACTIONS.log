@@ -1,0 +1,99 @@
+1)  Installing ubuntu16 on VirtualBox (http://releases.ubuntu.com/16.04/ubuntu-16.04-desktop-i386.iso.torrent) 
+    UnuntuBox->Devices->Insert Guest Additions CD
+    Set bidirectional clipboard in UbuntuBox Setting->General->Advanced 
+    Restart UnutuBox, Open Terminal:
+
+    #   Install pip
+    curl "https://bootstrap.pypa.io/get-pip.py" -o "get-pip.py 
+    sudo python get-pip.py
+
+    #   Install requirements    
+    sudo apt-get install python-dev
+    sudo pip install -r requirements.txt 
+
+    #   Install Vim
+    mkdir ~/.vim/colors
+    sudo apt-get install vim git
+    git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+    wget -O ~/.vimrc https://raw.githubusercontent.com/yanlobkarev/yscripts/master/.vimrc
+    wget -O ~/.vim/colors/moonshine.vim https://raw.githubusercontent.com/KKPMW/moonshine-vim/master/colors/moonshine.vim
+    #   vim->:PluginInstall->:qa!
+
+2)  #   Didn't found out how to set custom tty width/height. 
+    #   Shit!
+    # gonna switch off gnome followinf dat instruction ( http://ubuntuforums.org/showthread.php?t=1661065 )  Do I ?
+
+3)  #   Disable animations
+    sudo apt-get update
+    sudo apt-get install unity-tweak-tool    
+    unity-tweak-tool  # uncheck animations
+
+    sudo apt-get install compizconfig-settings-manager
+    ccsm  # uncheck animations as much as possible
+
+4)  #   Add Shared folders Setting->Shared folders->plus->
+    #       check make permanent
+    #       check auto-mount
+    #       select Path %code%
+    #       ->Ok
+    #   Restart UbuntuBox
+    sudo usermod -a -G vboxsf $(whoami) #   Restart UnutuBox again
+    cd /media/sf_%code%
+
+5)  Fix UbuntuBox swallows cmd+Tab keys (very annoying for Mac users)
+    VirtualBox->Preferences->Input Tab->uncheck Auto Capture Keyboard
+
+6)  Wrote a simple server & signal-server using following 
+    example https://habrahabr.ru/post/304150/
+
+7)  Creating a new UbuntuBox2 (new VirtualBox instance)
+    Shit just didn't worked out from the first time. 
+    (client has server's nat address, but server doesn't 
+    receive messages from client). Meh, going to sleep.
+
+8)  Installed STUN server on host machine:
+    npm install https://github.com/keyneom/stun.git
+    Anyway it didn't worked out(( UbuntuBox behind NAT 
+    reports NAT type `Blocked`. Shit!
+
+9)  Setup TeamViewer on my work machine: NAT type `Full Cone`.
+    On my home machine: NAT type `Symmetric NAT`.
+    On my work machine: ./echoer.py (UDP echo server on 9999 port).
+
+10) Got some beer. Did shit. Also bought 2$ VPS.
+    Worked if chat_server.py behind `Full Cone NAT`.
+    And chat_client.py behind `Symmetric NAT`.
+    Attached fancy colored prompt to chat.
+    Scanning shit for PEP8 issues. Seems to be, twisted
+    coding styles (method naming) contradicts to PEP8.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
