@@ -2,4 +2,6 @@
 env/
 .idea/
 *.pyc
+_trial_temp/
+*.swp
 
