@@ -1,5 +1,4 @@
-#!python
-from twisted.internet import reactor
+from twisted.internet import reactor, stdio
 from twisted.protocols.basic import LineReceiver
 
 
@@ -16,6 +15,10 @@ class ColoredPrompt(LineReceiver, object):
     def __init__(self, sender=None, prompt='You'):
         self.sender = sender
         self.prompt = prompt
+
+    def startProtocol(self):
+        super(ColoredPrompt, self).startProtocol()
+        stdio.StandardIO(self)
 
     def lineReceived(self, line):
         self._writePrompt()

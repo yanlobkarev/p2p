@@ -1,4 +1,4 @@
-#!python
+#!/usr/bin/python
 from twisted.internet import reactor
 from common import unpack_datagramm_args
 from base import BaseServer
@@ -61,6 +61,5 @@ if __name__ == '__main__':
     print "Starting UDP Signal Server server on port 8888"
     reactor.listenUDP(8888, ss)
     reactor.run()
-
 
 

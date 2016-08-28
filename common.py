@@ -10,7 +10,7 @@ SIGNAL_SERVER_PORT = 8888
 def unpack_datagramm_args(func):
     spec = inspect.getargspec(func)
     args_count = len(spec.args)
-    PARAMS = '_'.join(spec.args[2:]).upper()  # without `self, addr`
+    PARAMS = ','.join(spec.args[2:]).upper()  # without `self, addr`
     ERR_MSG = 'RESP|ERROR|WRONG_PARAMS:SHOULD_BE %s' % PARAMS
 
     def wrapped(self, addr, data):
@@ -20,7 +20,7 @@ def unpack_datagramm_args(func):
         if len(args) != args_count:
             self.transport.write(ERR_MSG, addr)
         else:
-            func(*args)
+            return func(*args)
     return wrapped
 
 

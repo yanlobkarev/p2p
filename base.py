@@ -7,14 +7,16 @@ import socket
 
 
 class BaseServer(DatagramProtocol, object):
-    def __init__(self):
+    def __init__(self, prompt=None):
         self.clients = {}
-        self.prompt = ColoredPrompt(prompt='>')
-        stdio.StandardIO(self.prompt)
+        self.prompt = prompt or ColoredPrompt(prompt='>')
 
     def startProtocol(self):
         self.loop = task.LoopingCall(self.sendHeartbeat)
         self.loop.start(0.5)
+
+    def stopProtocol(self):
+        self.loop.stop()
 
     def datagramReceived(self, data, addr):
         if data.startswith('CONNECT'):
@@ -39,13 +41,13 @@ class BaseServer(DatagramProtocol, object):
 
     def sendHeartbeat(self):
         for endpoint, client in self.clients.copy().iteritems():
-            missed = client.get('missed_beats', 0)
+            missed = client.get('missed_beats', 1)
             if missed > 30:
                 del self.clients[endpoint]
                 self.prompt.log("disconnected %s" % str(endpoint))
             else:    
                 client['missed_beats'] = missed + 1
-                self.transport.write(b'HEART', endpoint)
+                self.transport.write('HEART', endpoint)
 
     def handleHeartbeat(self, addr):
         if addr not in self.clients:

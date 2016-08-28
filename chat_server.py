@@ -7,8 +7,8 @@ from base import BaseClient, BaseServer
 
 
 class ChatServer(BaseClient, BaseServer):
-    def __init__(self, signal_server=None, private=None):
-        super(ChatServer, self).__init__()
+    def __init__(self, signal_server=None, private=None, **kwargs):
+        super(ChatServer, self).__init__(**kwargs)
         self.signal_server = signal_server
         self.private = private
 
